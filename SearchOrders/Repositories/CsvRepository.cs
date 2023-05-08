@@ -12,21 +12,22 @@ namespace SearchOrders.Repositories
 
         public CsvRepository(IConfiguration config)
         {
-            csvFilePath = config.GetValue<string>(csvFilePath);
+            csvFilePath = config.GetValue<string>("CsvFilePath");
         }
 
         public List<PurchaseOrder> GetOrders()
         {
             var orders = new List<PurchaseOrder>();
-           
+
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ",",
                 Encoding = Encoding.UTF8,
-                HasHeaderRecord = true
+                HasHeaderRecord = true,
+                NumberStyle = NumberStyles.Number,
+                CultureInfo = CultureInfo.GetCultureInfo("en-US")
             };
 
-            
             using (var reader = new StreamReader(csvFilePath, Encoding.UTF8))
             using (var csv = new CsvReader(reader, config))
             {
