@@ -1,6 +1,8 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using SearchOrders.Models;
 using System.Globalization;
+using System.Text;
 
 namespace SearchOrders.Repositories
 {
@@ -15,10 +17,21 @@ namespace SearchOrders.Repositories
 
         public List<PurchaseOrder> GetOrders()
         {
-            using (var reader = new StreamReader(csvFilePath))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            var orders = new List<PurchaseOrder>();
+           
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                var orders = csv.GetRecords<PurchaseOrder>().ToList();
+                Delimiter = ",",
+                Encoding = Encoding.UTF8,
+                HasHeaderRecord = true
+            };
+
+            
+            using (var reader = new StreamReader(csvFilePath, Encoding.UTF8))
+            using (var csv = new CsvReader(reader, config))
+            {
+                // Read the records into a list of objects
+                 orders = csv.GetRecords<PurchaseOrder>().ToList();
                 return orders;
             }
         }
