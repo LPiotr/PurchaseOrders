@@ -13,7 +13,7 @@ namespace SearchOrders.Models
         public string ClientName { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }
-        public DateTime? ShipmentDate { get; set; } = default(DateTime?);
+        public DateTime? ShipmentDate { get; set; } 
         [Required]
         public int Quantity { get; set; }
         [Required]
