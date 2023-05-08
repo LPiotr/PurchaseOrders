@@ -30,7 +30,7 @@ namespace SearchOrders.Repositories
             using (var reader = new StreamReader(csvFilePath, Encoding.UTF8))
             using (var csv = new CsvReader(reader, config))
             {
-                 orders = csv.GetRecords<PurchaseOrder>().ToList();
+                orders = csv.GetRecords<PurchaseOrder>().ToList();
                 return orders;
             }
         }
