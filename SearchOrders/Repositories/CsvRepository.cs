@@ -24,7 +24,6 @@ namespace SearchOrders.Repositories
                 Delimiter = ",",
                 Encoding = Encoding.UTF8,
                 HasHeaderRecord = true
-
             };
 
             using (var reader = new StreamReader(csvFilePath, Encoding.UTF8))
