@@ -19,13 +19,11 @@ namespace SearchOrders.Repositories
         {
             var orders = new List<PurchaseOrder>();
 
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.GetCultureInfo("en-US")
             {
                 Delimiter = ",",
                 Encoding = Encoding.UTF8,
-                HasHeaderRecord = true,
-                NumberStyle = NumberStyles.Number,
-                CultureInfo = CultureInfo.GetCultureInfo("en-US")
+                HasHeaderRecord = true
             };
 
             using (var reader = new StreamReader(csvFilePath, Encoding.UTF8))
